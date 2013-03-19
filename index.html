@@ -64,13 +64,12 @@ $ git checkout gh-pages
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    <script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      jQuery(document).ready(function($) {
+        $('.header').textEffect();
+      });
+    </script>		
   </body>
-  <script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>
-  jQuery(document).ready(function($) {
-    $('.header').textEffect();
-  });
-  </script>
 </html>

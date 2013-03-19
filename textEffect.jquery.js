@@ -1,5 +1,5 @@
 if ( typeof Object.create !== 'function' ) {
-  Object.create = function( obj ) {
+	Object.create = function( obj ) {
 		function F() {};
 		F.prototype = obj;
 		return new F();
@@ -16,23 +16,18 @@ if ( typeof Object.create !== 'function' ) {
 			self.oldText = self.$elem.html();
 
 			if (typeof options === 'string') {
-				// self.effect = options;
-			} else {
-				self.options = $.extend( {}, $.fn.textEffect.options, options );
+				var json = '{"effect": "' + options + '"}';
+				options = $.parseJSON(json);
 			}
-			self.toArray();
+
+			self.options = $.extend( {}, $.fn.textEffect.options, options );
+
+			self.whichEffect(self.options.effect);
 		},
 
-		toArray: function () {
+		whichEffect: function (toSwitch) {
 			var self = this;
-			self.textArray = [];
-			self.innerArray = [];
-			for (i = 0; i < self.$elem.html().length; i++) {
-				self.textArray[i] = "<span class='text-effect'>" + self.$elem.html().substr(i, 1) + "</span>";
-				self.innerArray[i] = self.$elem.html().substr(i, 1);
-			}
-
-			switch (self.options.effect) {
+			switch (toSwitch) {
 				case 'grow':
 					self.grow();
 					break;
@@ -42,6 +37,28 @@ if ( typeof Object.create !== 'function' ) {
 				case 'jumble':
 					self.jumble();
 					break;
+				case 'slide':
+					self.slide();
+					break;
+				case 'dropdown':
+					self.dropdown();
+					break;
+				case 'random':
+					self.random();
+					break;
+				default:
+					self.random();
+					break;
+			}
+		},
+
+		toArray: function (effectOption) {
+			var self = this;
+			self.textArray = [];
+			self.innerArray = [];
+			for (i = 0; i < self.oldText.length; i++) {
+				self.innerArray[i] = self.$elem.html().substr(i, 1);
+				self.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + self.innerArray[i] + "</span>";
 			}
 		},
 
@@ -52,23 +69,53 @@ if ( typeof Object.create !== 'function' ) {
 			}
 		},
 
+		random: function () {
+			var self = this;
+			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
+			var effect = effects[(Math.floor(Math.random() * effects.length))];
+			self.whichEffect(effect);
+		},
+
+		slide: function () {
+			var self = this;
+			var oldPosition = self.$elem.css('position');
+			var offscreen = self.$elem.offset().left + self.$elem.width();
+			self.toArray('position: relative; left: ' + offscreen + 'px;');
+			self.$elem.html('');
+			self.append();
+			self.apply('left', 0);
+		},
+
+		dropdown: function () {
+			var self = this;
+			var oldPosition = self.$elem.css('position');
+			var offscreen = self.$elem.offset().top + self.$elem.height();
+			self.toArray('position: relative; bottom: ' + offscreen + 'px;');
+			self.$elem.html('');
+			self.append();
+			self.apply('bottom', 0);			
+		},
+
 		grow: function () {
 			var self = this;
-			var textSize = self.$elem.css('fontSize');
-
+			var oldTextSize = self.$elem.css('fontSize');
+			self.toArray('font-size: 0px;');
 			self.$elem.html('');		
-			self.$elem.css('fontSize', '0px');
 			self.append();
-			self.apply('fontSize', textSize);
+			self.apply('fontSize', oldTextSize);
 		},
 
 		fade: function () {
 			var self = this;
+
+			// object.style.filter = "progid:DXImageTransform.Microsoft.Alpha(sProperties)"
+
+			// object.filters.item("DXImageTransform.Microsoft.Alpha").Opacity [ = iOpacity ]
+
 			var oldOpacity = self.$elem.css('opacity');
+			self.toArray('opacity: 0;');
 			self.$elem.html('');
 			self.append();
-			self.$elem.children('span.text-effect').css('opacity', '0');
-			var i = 0;
 			self.apply('opacity', oldOpacity);
 		},
 
@@ -77,6 +124,7 @@ if ( typeof Object.create !== 'function' ) {
 			var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 			var ii = 0;
 			var oldColor = self.$elem.css('color');
+			self.toArray();
 			self.$elem.html('');
 			self.append();
 			var jumbleEffectInterval = setInterval(function () {
@@ -115,8 +163,10 @@ if ( typeof Object.create !== 'function' ) {
 			var effectInterval = setInterval(function () {
 				self.$elem.children('span').eq(i).animate(obj, self.options.completionSpeed / self.textArray.length, function () {
 						if (i === (self.$elem.children('span.text-effect').length)) {
-							self.reset();
 							clearInterval(effectInterval);
+							setTimeout(function () {
+								self.reset();								
+							}, self.options.effectSpeed * 3);
 						}
 					});
 				i++;
@@ -129,7 +179,7 @@ if ( typeof Object.create !== 'function' ) {
 		}
 	}
 
-	$.fn.textEffect = function( options ) {
+	$.fn.textEffect = function(options) {
 		return this.each(function() {
 			var texteffect = Object.create(TextEffect);
 			texteffect.init(options, this);
@@ -137,7 +187,7 @@ if ( typeof Object.create !== 'function' ) {
 	};
 
 	$.fn.textEffect.options = {
-		effect: 'fade',
+		effect: 'random',
 		effectSpeed: 150,
 		completionSpeed: 6000,
 		jumbleColor: '#7f7f7f'

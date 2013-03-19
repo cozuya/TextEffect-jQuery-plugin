@@ -60,16 +60,33 @@ h1,h2, h3 {
 	padding-bottom: 5px;
 }
 
+h2 > div {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+h2 > div:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
 h1 {
-	font-size: 30px;
+	font-size: 64px;
 }
 
 h2 {
-	font-size: 24px;
+	font-size: 45px;
+}
+
+button {
+  color: white;
 }
 
 h3 {
-	font-size: 18px;
+  float: right;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+	font-size: 35px;
 }
 
 h4, h5, h6 {

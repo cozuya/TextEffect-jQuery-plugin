@@ -59,10 +59,6 @@ h1, h3 {
 	padding-bottom: 5px;
 }
 
-h1 {
-  border-bottom: 1px solid #ccc;
-}
-
 section > div {
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
@@ -75,11 +71,12 @@ section > div:after {
 }
 
 h1 {
-	font-size: 64px;
+  border-bottom: 1px solid #ccc;
+	font-size: 58px;
 }
 
 h2 {
-	font-size: 45px;
+	font-size: 39px;
 }
 
 button {
@@ -90,10 +87,10 @@ button {
 }
 
 h3 {
-  float: right;
   font-family: "Raleway", Helvetica, Arial, sans-serif;
 	font-size: 55px;
-  display: none;
+  display: inline-block;
+  visibility: hidden;
 }
 
 h4, h5, h6 {

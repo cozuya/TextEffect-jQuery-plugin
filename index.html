@@ -43,15 +43,15 @@
           </div>
           <div>
             <button>Jumble</button>
-            <h3>Lorem ipsum dolor sit amet.</h3>            
+            <h3>Lorem ipsum.</h3>            
           </div>
           <div>
             <button>Slide</button>
-            <h3>Lorem ipsum dolor sit amet.</h3>
+            <h3>Lorem ipsum.</h3>
           </div>
           <div>
             <button>Dropdown</button>
-            <h3>Lorem ipsum dolor sit amet.</h3>
+            <h3>Lorem ipsum.</h3>
           </div>
       </section>
       <footer>
@@ -67,7 +67,7 @@
 
         $('button').on('click', function() {
           var effect = ($(this).html()).toLowerCase();
-          $(this).next().textEffect(effect);
+          $(this).next().show().textEffect(effect);
         });
 
       });

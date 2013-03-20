@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
   <head>
@@ -19,7 +20,7 @@
         <p class="header">A simple plugin with various effects you can apply to text, letter by letter.  Currently in alpha.</p>
 
         <ul>
-          <li class="download"><a class="buttons" href="http://cozuya.github.com/TextEffect-jQuery-plugin/javascripts/textEffect.jquery.js">Download Direct</a></li>
+          <li class="download"><a class="buttons" href="http://cozuya.github.com/TextEffect-jQuery-plugin/javascripts/textEffect.jquery.js">Download JS</a></li>
           <li class="download"><a class="buttons" href="https://github.com/cozuya/TextEffect-jQuery-plugin/zipball/master">Download ZIP</a></li>
           <li><a class="buttons github" href="https://github.com/cozuya/TextEffect-jQuery-plugin">View On GitHub</a></li>
         </ul>
@@ -31,14 +32,11 @@
       <section>
         <h1>jQuery Text Effect Plugin</h1>
         <h2>Usage</h2>
-        <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object});</code></pre>
+        <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object literal});</code></pre>
         <h2>Effects</h2>
           <div>
             <button>fade</button>
             <h3>Lorem ipsum.</h3>
-            <p>
-              Does not work in IE 6-8 for obvious reasons, will be updated soon.
-            </p>
           </div>
           <div>
             <button>grow</button>
@@ -47,21 +45,31 @@
           <div>
             <button>jumble</button>
             <h3>Lorem ipsum.</h3>
-            <p>Accepts optional "jumbleColor" property (hex), default is mid-gray.            
           </div>
           <div>
             <button>slide</button>
             <h3>Lorem ipsum.</h3>
-            <p>Needs some work - may cause dreaded horizontal scrollbars and definitely not recommened for mobile/responsive sites.</p>
           </div>
           <div>
             <button>dropdown</button>
             <h3>Lorem ipsum.</h3>
           </div>
+          <h2>Options</h2>
+          <pre><code>{
+            effect: above effects, or "random".  Default is random.
+          	effectSpeed: the speed at which new letters begin to animate.  Default 150.
+          	completionSpeed: the speed of the animation.  Default 6000.
+          	jumbleColor: color of the jumbled letters in hex.  Default is mid gray(#7f7f7f).
+          }
+          </code></pre>
+          <h2>Issues/Coming Soon</h2>
+          <p>As this is a not-at-all mature plugin there's several things you should know/will be worked on.</p>
+          <ul>
+          	<li>In general spotty IE8 and below support.  In particular for obvious reasons "fade" isn't working at all. Test thoroughly.</li>
+          	<li>Both slide and dropdown need a bit of positioning tweaking and I definitely don't recommmend slide for mobile or responsive sites right now.</li>
+          	<li>Combination effects will be in future versions.  Also CSS3 specific ones.</li>
+          </ul>
       </section>
-      <footer>
-        <p>Hosted on <a href="https://pages.github.com">GitHub Pages</a>.</p>
-      </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -70,11 +78,12 @@
       jQuery(document).ready(function($) {
         $('h1').textEffect({
           effect: 'random',
+          effectSpeed: 250,
           completionSpeed: 1000
         });
 
         $('button').on('click', function() {
-          $(this).next().show().textEffect($(this).html());
+          $(this).next().css('visibility', 'visible').textEffect($(this).html());
         });
 
       });

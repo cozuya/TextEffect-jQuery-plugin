@@ -86,7 +86,9 @@ button {
   float: left;
   margin-top: 20px;
 }
-
+h1, h2, h3 {
+  text-shadow: 2px 2px 5px rgb(162, 162, 162);
+}
 h3 {
   font-family: "Raleway", Helvetica, Arial, sans-serif;
 	font-size: 55px;
@@ -338,7 +340,7 @@ a.buttons:hover {
 /* Section - for main page content */
 
 section {
-  width:650px;
+  width:660px;
   float:right;
   padding-bottom:50px;
 }

@@ -54,18 +54,18 @@ h1, h2, h3 {
 	font-weight: normal;
 }
 
-h1,h2, h3 {
+h1, h3 {
 	display: block;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 5px;
 }
 
-h2 > div {
+section > div {
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
 }
 
-h2 > div:after {
+section > div:after {
   display: table;
   content: '';
   clear: both;
@@ -81,12 +81,16 @@ h2 {
 
 button {
   color: white;
+  padding: 9px 15px;
+  width: 116px;
+  font-size: 18px;
 }
 
 h3 {
   float: right;
   font-family: "Raleway", Helvetica, Arial, sans-serif;
-	font-size: 35px;
+	font-size: 55px;
+  display: none;
 }
 
 h4, h5, h6 {
@@ -175,6 +179,7 @@ code, pre {
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#000;
   font-size:14px;
+  white-space: normal;
 }
 
 pre {
@@ -182,8 +187,6 @@ pre {
   background: #FDFEFB;
   border-radius:4px;
   border:1px solid #D7D8C8;
-  overflow: auto;
-  overflow-y: hidden;
 	margin-bottom: 32px;
 }
 

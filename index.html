@@ -34,28 +34,28 @@
         <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object});</code></pre>
         <h2>Effects</h2>
           <div>
-            <button>Fade</button>
+            <button>fade</button>
             <h3>Lorem ipsum.</h3>
           </div>
           <div>
-            <button>Grow</button>
+            <button>grow</button>
             <h3>Lorem ipsum.</h3>            
           </div>
           <div>
-            <button>Jumble</button>
+            <button>jumble</button>
             <h3>Lorem ipsum.</h3>            
           </div>
           <div>
-            <button>Slide</button>
+            <button>slide</button>
             <h3>Lorem ipsum.</h3>
           </div>
           <div>
-            <button>Dropdown</button>
+            <button>dropdown</button>
             <h3>Lorem ipsum.</h3>
           </div>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a>.</p>
+        <p>Hosted on <a href="https://pages.github.com">GitHub Pages</a>.</p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
@@ -63,11 +63,13 @@
     <script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
     <script>
       jQuery(document).ready(function($) {
-        $('h1').textEffect();
+        $('h1').textEffect({
+          effect: 'random',
+          completionSpeed: 2000
+        });
 
         $('button').on('click', function() {
-          var effect = ($(this).html()).toLowerCase();
-          $(this).next().show().textEffect(effect);
+          $(this).next().show().textEffect($(this).html());
         });
 
       });

@@ -95,7 +95,7 @@ h3 {
   display: inline-block;
   visibility: hidden;
   margin: 0 0 0 100px;
-  color: rgb(71, 71, 71);
+  color: rgb(42, 71, 189);
 }
 
 h4, h5, h6 {
@@ -340,7 +340,7 @@ a.buttons:hover {
 /* Section - for main page content */
 
 section {
-  width:660px;
+  width:670px;
   float:right;
   padding-bottom:50px;
 }

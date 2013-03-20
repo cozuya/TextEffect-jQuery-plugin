@@ -56,8 +56,11 @@ h1, h2, h3 {
 
 h1, h3 {
 	display: block;
-	border-bottom: 1px solid #ccc;
 	padding-bottom: 5px;
+}
+
+h1 {
+  border-bottom: 1px solid #ccc;
 }
 
 section > div {
@@ -246,6 +249,7 @@ header {
 
 p.header {
 	font-size: 16px;
+  font-family: "Raleway"
 }
 
 h1.header {

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Arvo:400,700,400italic);
-
 @import url(http://fonts.googleapis.com/css?family=Oswald|Raleway:500|Open+Sans);
 
 /* MeyerWeb Reset */
@@ -32,7 +30,7 @@ body {
   font-family:"Open Sans", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	color: #232323;
-	background-color: #FBFAF7;
+	background-color: rgb(243, 243, 243);
 	margin: 0;
 	line-height: 1.8em;
 	-webkit-font-smoothing: antialiased;
@@ -84,6 +82,9 @@ button {
   padding: 9px 15px;
   width: 116px;
   font-size: 18px;
+  display: block;
+  float: left;
+  margin-top: 20px;
 }
 
 h3 {
@@ -91,6 +92,8 @@ h3 {
 	font-size: 55px;
   display: inline-block;
   visibility: hidden;
+  margin: 0 0 0 100px;
+  color: rgb(71, 71, 71);
 }
 
 h4, h5, h6 {

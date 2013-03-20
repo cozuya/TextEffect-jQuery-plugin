@@ -1,5 +1,5 @@
 if ( typeof Object.create !== 'function' ) {
-  Object.create = function( obj ) {
+	Object.create = function( obj ) {
 		function F() {};
 		F.prototype = obj;
 		return new F();
@@ -79,8 +79,8 @@ if ( typeof Object.create !== 'function' ) {
 		slide: function () {
 			var self = this;
 			var oldPosition = self.$elem.css('position');
-			var offscreen = self.$elem.offset().left + self.$elem.width();
-			self.toArray('position: relative; left: ' + offscreen + 'px;');
+			var startPosition = (self.$elem.offset().left + self.$elem.width()) / 3;
+			self.toArray('visibility: hidden; position: relative; left: ' + startPosition + 'px;');
 			self.$elem.html('');
 			self.append();
 			self.apply('left', 0);
@@ -161,7 +161,7 @@ if ( typeof Object.create !== 'function' ) {
 			obj[effect] = oldEffect;
 			var i = 0;
 			var effectInterval = setInterval(function () {
-				self.$elem.children('span').eq(i).animate(obj, self.options.completionSpeed / self.textArray.length, function () {
+				self.$elem.children('span').eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
 						if (i === (self.$elem.children('span.text-effect').length)) {
 							clearInterval(effectInterval);
 							setTimeout(function () {

@@ -1,3 +1,5 @@
+;
+
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
 		function F() {};
@@ -10,129 +12,95 @@ if ( typeof Object.create !== 'function' ) {
 
 	var TextEffect = {
 		init: function (options, elem) {
-			var self = this;
-			self.elem = elem;
-			self.$elem = $(elem);
-			self.oldText = self.$elem.html();
-
-			if (typeof options === 'string') {
-				var json = '{"effect": "' + options + '"}';
-				options = $.parseJSON(json);
-			}
-
-			self.options = $.extend( {}, $.fn.textEffect.options, options );
-
-			self.whichEffect(self.options.effect);
+			var _options = {};
+			this.elem = elem;
+			this.$elem = $(elem);
+			this.oldText = this.$elem.html();
+			typeof options === 'string' ? _options['effect'] = options : _options = options;
+			this.options = $.extend( {}, $.fn.textEffect.options, _options );
+			this.whichEffect(this.options.effect);
 		},
 
-		whichEffect: function (toSwitch) {
-			var self = this;
-			switch (toSwitch) {
+		whichEffect: function (effect) {
+			switch (effect) {
 				case 'grow':
-					self.grow();
+					this.grow();
 					break;
 				case 'fade':
-					self.fade();
+					this.fade();
 					break;
 				case 'jumble':
-					self.jumble();
+					this.jumble();
 					break;
 				case 'slide':
-					self.slide();
+					this.slide();
 					break;
 				case 'dropdown':
-					self.dropdown();
+					this.dropdown();
 					break;
 				case 'random':
-					self.random();
+					this.random();
 					break;
 				default:
-					self.random();
+					this.random();
 					break;
 			}
 		},
 
-		toArray: function (effectOption) {
-			var self = this;
-			self.textArray = [];
-			self.innerArray = [];
-			for (i = 0; i < self.oldText.length; i++) {
-				self.innerArray[i] = self.$elem.html().substr(i, 1);
-				self.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + self.innerArray[i] + "</span>";
+		setup: function (effectOption) {
+			this.textArray = [];
+			this.innerArray = [];
+			for (i = 0; i < this.oldText.length; i++) {
+				this.innerArray[i] = this.$elem.html().substr(i, 1);
+				this.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + this.innerArray[i] + "</span>";
 			}
-		},
-
-		append: function () {
-			var self = this;
-			for (i = 0; i < self.textArray.length; i++) {
-				self.$elem.append(self.textArray[i]);
+			this.$elem.html('');
+			for (i = 0; i < this.textArray.length; i++) {
+				this.$elem.append(this.textArray[i]);
 			}
 		},
 
 		random: function () {
-			var self = this;
 			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
 			var effect = effects[(Math.floor(Math.random() * effects.length))];
-			self.whichEffect(effect);
+			this.whichEffect(effect);
 		},
 
 		slide: function () {
-			var self = this;
-			var oldPosition = self.$elem.css('position');
-			var startPosition = (self.$elem.offset().left + self.$elem.width()) / 3;
-			self.toArray('visibility: hidden; position: relative; left: ' + startPosition + 'px;');
-			self.$elem.html('');
-			self.append();
-			self.apply('left', 0);
+			var startPosition = (this.$elem.offset().left + this.$elem.width());
+			this.setup('visibility: hidden; position: relative; left: ' + startPosition + 'px;');
+			this.apply('left', 0);
 		},
 
 		dropdown: function () {
-			var self = this;
-			var oldPosition = self.$elem.css('position');
-			var offscreen = self.$elem.offset().top + self.$elem.height();
-			self.toArray('position: relative; bottom: ' + offscreen + 'px;');
-			self.$elem.html('');
-			self.append();
-			self.apply('bottom', 0);			
+			var offscreen = this.$elem.offset().top + this.$elem.height() * 1.1;  // little extra padding
+			this.setup('position: relative; bottom: ' + offscreen + 'px;');
+			this.apply('bottom', 0);			
 		},
 
 		grow: function () {
-			var self = this;
-			var oldTextSize = self.$elem.css('fontSize');
-			self.toArray('font-size: 0px;');
-			self.$elem.html('');		
-			self.append();
-			self.apply('fontSize', oldTextSize);
+			this.setup('font-size: 0px;');
+			this.apply('fontSize', this.$elem.css('fontSize'));
 		},
 
 		fade: function () {
-			var self = this;
-
 			// object.style.filter = "progid:DXImageTransform.Microsoft.Alpha(sProperties)"
-
 			// object.filters.item("DXImageTransform.Microsoft.Alpha").Opacity [ = iOpacity ]
-
-			var oldOpacity = self.$elem.css('opacity');
-			self.toArray('opacity: 0;');
-			self.$elem.html('');
-			self.append();
-			self.apply('opacity', oldOpacity);
+			this.setup('opacity: 0;');
+			this.apply('opacity', this.$elem.css('opacity'));
 		},
 
 		jumble: function () {
 			var self = this;
 			var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 			var ii = 0;
-			var oldColor = self.$elem.css('color');
-			self.toArray();
-			self.$elem.html('');
-			self.append();
+			this.setup();
 			var jumbleEffectInterval = setInterval(function () {
 				if (self.jumbleInterval) {
 					clearInterval(self.jumbleInterval);
 				}
 				self.jumbleIt(letterArray, ii);
-				self.$elem.children('span.text-effect').eq(ii).html(self.innerArray[ii]).css('color', oldColor);
+				self.$elem.children('span.text-effect').eq(ii).html(self.innerArray[ii]).css('color', self.$elem.css('color'));
 				if (ii === (self.innerArray.length - 1)) {
 					clearInterval(jumbleEffectInterval);
 					self.reset();
@@ -144,10 +112,10 @@ if ( typeof Object.create !== 'function' ) {
 
 		jumbleIt: function (letterArray, jumbleLength) {
 			var self = this;
-			self.jumbleInterval = setInterval(function () {
+			this.jumbleInterval = setInterval(function () {
 				for (var i = (self.textArray.length - 1); i > jumbleLength; i--) {
-					if (self.innerArray[i] !==' ') {
-						self.$elem.children('span.text-effect').eq(i).html(letterArray[Math.floor(Math.random() * 35)]).css('color', self.options.jumbleColor);
+					if (self.innerArray[i] !== ' ') {
+						self.$elem.children('span.text-effect').eq(i).html(letterArray[Math.floor(Math.random() * (letterArray.length - 1))]).css('color', self.options.jumbleColor);
 					} else {
 						self.$elem.children('span.text-effect').eq(i).html(' ');
 					}
@@ -166,7 +134,7 @@ if ( typeof Object.create !== 'function' ) {
 							clearInterval(effectInterval);
 							setTimeout(function () {
 								self.reset();								
-							}, self.options.effectSpeed * 3);
+							}, self.options.effectSpeed);
 						}
 					});
 				i++;
@@ -174,8 +142,7 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		reset: function () {
-			var self = this;
-			self.$elem.html(self.oldText);
+			this.$elem.html(self.oldText);
 		}
 	}
 

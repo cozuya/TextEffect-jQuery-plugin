@@ -76,11 +76,7 @@
     <script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
     <script>
       jQuery(document).ready(function($) {
-        $('h1').textEffect({
-          effect: 'random',
-          effectSpeed: 100,
-          completionSpeed: 1000
-        });
+        $('h1').textEffect();
 
         $('button').on('click', function() {
           $(this).next().css('visibility', 'visible').textEffect($(this).html());

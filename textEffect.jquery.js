@@ -1,5 +1,8 @@
 ;
 
+// jQuery text effect plugin created by Chris Ozols copywrite MIT license
+// v0.11
+
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
 		function F() {};
@@ -13,10 +16,9 @@ if ( typeof Object.create !== 'function' ) {
 	var TextEffect = {
 		init: function (options, elem) {
 			var _options = {};
-			this.elem = elem;
 			this.$elem = $(elem);
 			this.oldText = this.$elem.html();
-			typeof options === 'string' ? _options['effect'] = options : _options = options;
+			typeof options === 'string' ? _options.effect = options : _options = options;
 			this.options = $.extend( {}, $.fn.textEffect.options, _options );
 			this.whichEffect(this.options.effect);
 		},
@@ -41,21 +43,18 @@ if ( typeof Object.create !== 'function' ) {
 				case 'random':
 					this.random();
 					break;
-				default:
-					this.random();
-					break;
 			}
 		},
 
 		setup: function (effectOption) {
 			this.textArray = [];
 			this.innerArray = [];
-			for (i = 0; i < this.oldText.length; i++) {
+			for (var i = 0; i < this.oldText.length; i++) {
 				this.innerArray[i] = this.$elem.html().substr(i, 1);
 				this.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + this.innerArray[i] + "</span>";
 			}
 			this.$elem.html('');
-			for (i = 0; i < this.textArray.length; i++) {
+			for (var i = 0; i < this.textArray.length; i++) {
 				this.$elem.append(this.textArray[i]);
 			}
 		},
@@ -142,9 +141,9 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		reset: function () {
-			this.$elem.html(self.oldText);
+			this.$elem.html(this.oldText);
 		}
-	}
+	};
 
 	$.fn.textEffect = function(options) {
 		return this.each(function() {
@@ -158,5 +157,5 @@ if ( typeof Object.create !== 'function' ) {
 		effectSpeed: 150,
 		completionSpeed: 6000,
 		jumbleColor: '#7f7f7f'
-	}
+	};
 })( jQuery, window, document );

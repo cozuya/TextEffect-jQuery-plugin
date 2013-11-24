@@ -140,7 +140,6 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		reset: function () {
-			console.log('reset fired');
 			this.$elem.html(this.oldText);
 		}
 	};

@@ -1,7 +1,7 @@
 ;
 
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license
-// v0.11
+// v0.12
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
@@ -121,25 +121,6 @@ if ( typeof Object.create !== 'function' ) {
 				}
 			}, 70);
 		},
-
-		// apply: function (effect, oldEffect) {
-		// 	var self = this;
-		// 	var obj = {};
-		// 	obj[effect] = oldEffect;
-		// 	var i = 0;
-		// 	var $spans = self.$elem.children('span.text-effect');
-		// 	console.log(self.$elem.children('span.text-effect').length);
-		// 	var effectInterval = function () {
-		// 		$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.effectSpeed, function () {
-		// 				if (i === (self.$elem.children('span.text-effect').length)) {
-		// 					self.reset();
-		// 				}
-		// 				i++;
-		// 				effectInterval();
-		// 		});
-		// 	};
-		// 	effectInterval();
-		// },		
 
 		apply: function (effect, oldEffect) {
 			var self = this;

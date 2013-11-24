@@ -122,18 +122,36 @@ if ( typeof Object.create !== 'function' ) {
 			}, 70);
 		},
 
+		// apply: function (effect, oldEffect) {
+		// 	var self = this;
+		// 	var obj = {};
+		// 	obj[effect] = oldEffect;
+		// 	var i = 0;
+		// 	var $spans = self.$elem.children('span.text-effect');
+		// 	console.log(self.$elem.children('span.text-effect').length);
+		// 	var effectInterval = function () {
+		// 		$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.effectSpeed, function () {
+		// 				if (i === (self.$elem.children('span.text-effect').length)) {
+		// 					self.reset();
+		// 				}
+		// 				i++;
+		// 				effectInterval();
+		// 		});
+		// 	};
+		// 	effectInterval();
+		// },		
+
 		apply: function (effect, oldEffect) {
 			var self = this;
 			var obj = {};
 			obj[effect] = oldEffect;
 			var i = 0;
+			var $spans = self.$elem.children('span.text-effect');
 			var effectInterval = setInterval(function () {
-				self.$elem.children('span').eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
-						if (i === (self.$elem.children('span.text-effect').length)) {
+				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
+						if ($(this).index() === self.textArray.length - 1) {
 							clearInterval(effectInterval);
-							setTimeout(function () {
-								self.reset();								
-							}, self.options.effectSpeed);
+							self.reset();
 						}
 					});
 				i++;
@@ -141,6 +159,7 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		reset: function () {
+			console.log('reset fired');
 			this.$elem.html(this.oldText);
 		}
 	};

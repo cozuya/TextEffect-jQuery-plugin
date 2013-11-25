@@ -1,7 +1,7 @@
 ;
 
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license
-// v0.13
+// v0.14
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {

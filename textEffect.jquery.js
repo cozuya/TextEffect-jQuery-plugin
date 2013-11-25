@@ -127,7 +127,7 @@ if ( typeof Object.create !== 'function' ) {
 			var $spans = self.$elem.children('span.text-effect');
 			var effectInterval = setInterval(function () {
 				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
-						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || $(this).index() === 0) {
+						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {
 							clearInterval(effectInterval);
 							self.reset();
 						}

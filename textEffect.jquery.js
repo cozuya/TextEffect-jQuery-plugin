@@ -1,7 +1,7 @@
 ;
 
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license
-// v0.12
+// v0.13
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
@@ -48,13 +48,9 @@ if ( typeof Object.create !== 'function' ) {
 
 		setup: function (effectOption) {
 			this.textArray = [];
-			this.innerArray = [];
+			this.$elem.html('');  // oddly jQuery.empty doesn't work as well here.
 			for (var i = 0; i < this.oldText.length; i++) {
-				this.innerArray[i] = this.$elem.html().substr(i, 1);
-				this.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + this.innerArray[i] + "</span>";
-			}
-			this.$elem.html('');
-			for (var i = 0; i < this.textArray.length; i++) {
+				this.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + this.oldText.substr(i, 1) + "</span>";
 				this.$elem.append(this.textArray[i]);
 			}
 		},
@@ -92,24 +88,24 @@ if ( typeof Object.create !== 'function' ) {
 		jumble: function () {
 			var self = this;
 			var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-			var ii = 0;
+			var i = 0;
 			this.setup();
 			var jumbleEffectInterval = setInterval(function () {
 				if (self.jumbleInterval) {
 					clearInterval(self.jumbleInterval);
 				}
-				self.jumbleIt(letterArray, ii);
-				self.$elem.children('span.text-effect').eq(ii).html(self.innerArray[ii]).css('color', self.$elem.css('color'));
-				if (ii === (self.innerArray.length - 1)) {
+				self.runJumble(letterArray, i);
+				self.$elem.children('span.text-effect').eq(i).html(self.innerArray[i]).css('color', self.$elem.css('color'));
+				if (i === (self.innerArray.length - 1)) {
 					clearInterval(jumbleEffectInterval);
 					self.reset();
 				} else {
-					ii++;
+					i++;
 				}
 			}, self.options.effectSpeed);
 		},
 
-		jumbleIt: function (letterArray, jumbleLength) {
+		runJumble: function (letterArray, jumbleLength) {
 			var self = this;
 			this.jumbleInterval = setInterval(function () {
 				for (var i = (self.textArray.length - 1); i > jumbleLength; i--) {

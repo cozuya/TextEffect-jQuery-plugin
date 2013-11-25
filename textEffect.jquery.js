@@ -1,7 +1,7 @@
 ;
 
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license
-// v0.13
+// v0.14
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
@@ -95,8 +95,8 @@ if ( typeof Object.create !== 'function' ) {
 					clearInterval(self.jumbleInterval);
 				}
 				self.runJumble(letterArray, i);
-				self.$elem.children('span.text-effect').eq(i).html(self.innerArray[i]).css('color', self.$elem.css('color'));
-				if (i === (self.innerArray.length - 1)) {
+				self.$elem.children('span.text-effect').eq(i).html(self.oldText.substr(i, 1)).css('color', self.$elem.css('color'));
+				if (i === (self.oldText.length - 1)) {
 					clearInterval(jumbleEffectInterval);
 					self.reset();
 				} else {
@@ -109,7 +109,7 @@ if ( typeof Object.create !== 'function' ) {
 			var self = this;
 			this.jumbleInterval = setInterval(function () {
 				for (var i = (self.textArray.length - 1); i > jumbleLength; i--) {
-					if (self.innerArray[i] !== ' ') {
+					if (self.oldText.substr(i, 1) !== ' ') {
 						self.$elem.children('span.text-effect').eq(i).html(letterArray[Math.floor(Math.random() * (letterArray.length - 1))]).css('color', self.options.jumbleColor);
 					} else {
 						self.$elem.children('span.text-effect').eq(i).html(' ');
@@ -121,17 +121,18 @@ if ( typeof Object.create !== 'function' ) {
 		apply: function (effect, oldEffect) {
 			var self = this;
 			var obj = {};
+			var i;
 			obj[effect] = oldEffect;
-			var i = 0;
+			this.options.reverse ? i = this.textArray.length - 1 : i = 0;
 			var $spans = self.$elem.children('span.text-effect');
 			var effectInterval = setInterval(function () {
 				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
-						if ($(this).index() === self.textArray.length - 1) {
+						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {
 							clearInterval(effectInterval);
 							self.reset();
 						}
 					});
-				i++;
+				self.options.reverse ? i-- : i++;
 			}, self.options.effectSpeed);
 		},
 
@@ -151,6 +152,7 @@ if ( typeof Object.create !== 'function' ) {
 		effect: 'random',
 		effectSpeed: 150,
 		completionSpeed: 6000,
-		jumbleColor: '#7f7f7f'
+		jumbleColor: '#7f7f7f',
+		reverse: false
 	};
 })( jQuery, window, document );

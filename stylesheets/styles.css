@@ -442,3 +442,15 @@ footer {
     color:#444;
   }
 }
+
+
+button {
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+button[disabled] {
+  background: gray;
+  -webkit-box-shadow: inset 0px 1px 1px 0 gray;
+  box-shadow: inset 0px 1px 1px 0 gray;
+}

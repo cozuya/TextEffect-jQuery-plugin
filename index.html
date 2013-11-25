@@ -34,23 +34,28 @@
         <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object literal});</code></pre>
         <h2>Effects</h2>
           <div>
-            <button>fade</button>
+            <button class="non-reverse">fade</button>
+            <button class="reverse">edaf</button>
             <h3>Marshall Law</h3>
           </div>
           <div>
-            <button>grow</button>
+            <button class="non-reverse">grow</button>
+            <button class="reverse">worg</button>
             <h3>Paul Phoenix</h3>
           </div>
           <div>
-            <button>jumble</button>
+            <button class="non-reverse">jumble</button>
+            <button disabled>elbmuj</button>
             <h3>Nina Williams</h3>
           </div>
           <div>
-            <button>slide</button>
+            <button class="non-reverse">slide</button>
+            <button class="reverse">edils</button>
             <h3>Kazuya Mishima</h3>
           </div>
           <div>
-            <button>dropdown</button>
+            <button class="non-reverse">dropdown</button>
+            <button class="reverse">nwodpord</button>
             <h3>Armor King</h3>
           </div>
           <h2>Options</h2>
@@ -58,6 +63,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;effect: above effects, or "random".  Default is random.<br />
                   &nbsp;&nbsp;&nbsp;&nbsp;effectSpeed: the speed at which new letters begin to animate.  Default 150.<br />
                   &nbsp;&nbsp;&nbsp;&nbsp;completionSpeed: the speed of the animation.  Default 6000.<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;reverse: reverses direction of the effect, doesn't work for jumble just yet.  Boolean.<br />
                   &nbsp;&nbsp;&nbsp;&nbsp;jumbleColor: color of the jumbled letters in hex.  Default is mid gray(#7f7f7f).<br />
           }
           </code></pre>
@@ -66,7 +72,7 @@
           <ul>
                   <li>In general spotty IE8 and below support.  In particular for obvious reasons "fade" isn't working at all. Test thoroughly.</li>
                   <li>Odd behaviour involving line breaks/word wraps.</li>
-                  <li>Both slide and dropdown need a bit of positioning tweaking and I definitely don't recommend slide for mobile or responsive sites right now.</li>
+                  <li>I don't recommend slide for mobile or responsive sites right now for again what should be obvious reasons.</li>
                   <li>Combination effects will be in future versions.  Also CSS3 specific ones.</li>
           </ul>
       </section>
@@ -78,9 +84,20 @@
       jQuery(document).ready(function($) {
         $('h1').textEffect();
 
-        $('button').on('click', function() {
-          $(this).next().css('visibility', 'visible').textEffect($(this).html());
+        $('button.non-reverse').on('click', function(e) {
+          e.preventDefault();
+          $(this).next().next().css('visibility', 'visible').textEffect($(this).html());
         });
+
+        $('button.reverse').on('click', function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var effect = $this.prev().html();
+          $this.next().css('visibility', 'visible').textEffect({
+            effect: effect,
+            reverse: true
+          });
+        });        
 
       });
     </script>          

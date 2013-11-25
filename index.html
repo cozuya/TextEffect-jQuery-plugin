@@ -16,7 +16,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <p class="header">A simple plugin with various effects you can apply to text, letter by letter.  Current version 0.14.</p>
+        <p class="header">A simple plugin with various effects you can apply to text, letter by letter.  Current version 0.15.</p>
 
         <ul>
           <li class="download"><a class="buttons" href="http://cozuya.github.com/TextEffect-jQuery-plugin/javascripts/textEffect.jquery.js">Download JS</a></li>
@@ -31,7 +31,7 @@
       <section>
         <h1>jQuery Text Effect Plugin</h1>
         <h2>Usage</h2>
-        <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object literal});</code></pre>
+        <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object});</code></pre>
         <h2>Effects</h2>
           <div>
             <button class="non-reverse">fade</button>
@@ -68,9 +68,8 @@
           }
           </code></pre>
           <h2>Details</h2>
-          <p>This plugin effectively works by turning a string into an array, wrapping it in span tags, and throwing it back into the DOM. As expected, event handlers don't work until the animation is complete. As this is a not-at-all mature plugin there's several things you should know/will be worked on. Some issues are:</p>
+          <p>This plugin effectively works by turning a string into an array, wrapping it in span tags, and throwing it back into the DOM. As expected, event handlers don't work until the animation is complete. Works well in modern browsers and for the most part not bad in IE8 and below.  As this is a not-at-all mature plugin there's several things you should know/will be worked on. Some issues are:</p>
           <ul>
-                  <li>In general spotty IE8 and below support.  In particular for obvious reasons "fade" isn't working at all. Test thoroughly.</li>
                   <li>Odd behaviour involving line breaks/word wraps.</li>
                   <li>I don't recommend slide for mobile or responsive sites right now for again what should be obvious reasons.</li>
                   <li>Combination effects will be in future versions.  Also CSS3 specific ones.</li>

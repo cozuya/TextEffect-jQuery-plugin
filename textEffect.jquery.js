@@ -1,11 +1,11 @@
 ;
 
-// jQuery text effect plugin created by Chris Ozols copywrite MIT license
-// v0.14
+// jQuery text effect plugin created by Chris Ozols copywrite MIT license 2013
+// v0.15
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
-		function F() {};
+		function F() {}
 		F.prototype = obj;
 		return new F();
 	};
@@ -48,7 +48,7 @@ if ( typeof Object.create !== 'function' ) {
 
 		setup: function (effectOption) {
 			this.textArray = [];
-			this.$elem.html('');  // oddly jQuery.empty doesn't work as well here.
+			this.$elem.html('');  // oddly jQuery.empty() doesn't work as well here.
 			for (var i = 0; i < this.oldText.length; i++) {
 				this.textArray[i] = "<span class='text-effect' style='" + effectOption + "'>" + this.oldText.substr(i, 1) + "</span>";
 				this.$elem.append(this.textArray[i]);
@@ -64,25 +64,23 @@ if ( typeof Object.create !== 'function' ) {
 		slide: function () {
 			var startPosition = (this.$elem.offset().left + this.$elem.width());
 			this.setup('visibility: hidden; position: relative; left: ' + startPosition + 'px;');
-			this.apply('left', 0);
+			this.run('left', 0);
 		},
 
 		dropdown: function () {
 			var offscreen = this.$elem.offset().top + this.$elem.height() * 1.1;  // little extra padding
 			this.setup('position: relative; bottom: ' + offscreen + 'px;');
-			this.apply('bottom', 0);			
+			this.run('bottom', 0);			
 		},
 
 		grow: function () {
 			this.setup('font-size: 0px;');
-			this.apply('fontSize', this.$elem.css('fontSize'));
+			this.run('fontSize', this.$elem.css('fontSize'));
 		},
 
 		fade: function () {
-			// object.style.filter = "progid:DXImageTransform.Microsoft.Alpha(sProperties)"
-			// object.filters.item("DXImageTransform.Microsoft.Alpha").Opacity [ = iOpacity ]
-			this.setup('opacity: 0;');
-			this.apply('opacity', this.$elem.css('opacity'));
+			this.$elem[0].style.opacity !== undefined ? this.setup('opacity: 0;') : this.setup('filter: alpha(opacity=0); display: inline-block;');  // IE8 and below. jQuery handles animating opacity natively.
+			this.run('opacity', this.$elem.css('opacity'));
 		},
 
 		jumble: function () {
@@ -118,7 +116,7 @@ if ( typeof Object.create !== 'function' ) {
 			}, 70);
 		},
 
-		apply: function (effect, oldEffect) {
+		run: function (effect, oldEffect) {
 			var self = this;
 			var obj = {};
 			var i;

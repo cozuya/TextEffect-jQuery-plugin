@@ -1,4 +1,4 @@
 TextEffect-jQuery-plugin
 ========================
 
-A simple plugin with various effects you can apply to text, letter by letter. Current version 0.14. See http://cozuya.github.io/TextEffect-jQuery-plugin/ for more info.
+A simple plugin with various effects you can apply to text, letter by letter. Current version 0.15. See http://cozuya.github.io/TextEffect-jQuery-plugin/ for more info.

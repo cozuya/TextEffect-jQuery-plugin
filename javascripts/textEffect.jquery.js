@@ -1,7 +1,7 @@
 ;
 
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license 2013
-// v0.15
+// v0.1.6
 
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
@@ -20,30 +20,7 @@ if ( typeof Object.create !== 'function' ) {
 			this.oldText = this.$elem.html();
 			typeof options === 'string' ? _options.effect = options : _options = options;
 			this.options = $.extend( {}, $.fn.textEffect.options, _options );
-			this.whichEffect(this.options.effect);
-		},
-
-		whichEffect: function (effect) {
-			switch (effect) {
-				case 'grow':
-					this.grow();
-					break;
-				case 'fade':
-					this.fade();
-					break;
-				case 'jumble':
-					this.jumble();
-					break;
-				case 'slide':
-					this.slide();
-					break;
-				case 'dropdown':
-					this.dropdown();
-					break;
-				case 'random':
-					this.random();
-					break;
-			}
+			this[this.options.effect]();
 		},
 
 		setup: function (effectOption) {
@@ -58,7 +35,7 @@ if ( typeof Object.create !== 'function' ) {
 		random: function () {
 			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
 			var effect = effects[(Math.floor(Math.random() * effects.length))];
-			this.whichEffect(effect);
+			this[effect]();
 		},
 
 		slide: function () {

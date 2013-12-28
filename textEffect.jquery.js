@@ -12,13 +12,18 @@ if ( typeof Object.create !== 'function' ) {
 }
 
 (function( $, window, document, undefined ) {
+	"use strict";
 
 	var TextEffect = {
 		init: function (options, elem) {
 			var _options = {};
 			this.$elem = $(elem);
 			this.oldText = this.$elem.html();
-			typeof options === 'string' ? _options.effect = options : _options = options;
+			if (typeof options === 'string') {
+				_options.effect = options;
+			} else {
+				_options = options;
+			}
 			this.options = $.extend( {}, $.fn.textEffect.options, _options );
 			this[this.options.effect]();
 		},
@@ -56,7 +61,8 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		fade: function () {
-			this.$elem[0].style.opacity !== undefined ? this.setup('opacity: 0;') : this.setup('filter: alpha(opacity=0); display: inline-block;');  // IE8 and below. jQuery handles animating opacity natively.
+			var opacity = this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;';  // IE8 and below. jQuery handles animating opacity natively.
+			this.setup(opacity);
 			this.run('opacity', this.$elem.css('opacity'));
 		},
 
@@ -96,9 +102,8 @@ if ( typeof Object.create !== 'function' ) {
 		run: function (effect, oldEffect) {
 			var self = this;
 			var obj = {};
-			var i;
+			var i = this.options.reverse ? this.textArray.length - 1 : 0;
 			obj[effect] = oldEffect;
-			this.options.reverse ? i = this.textArray.length - 1 : i = 0;
 			var $spans = self.$elem.children('span.text-effect');
 			var effectInterval = setInterval(function () {
 				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
@@ -107,7 +112,11 @@ if ( typeof Object.create !== 'function' ) {
 							self.reset();
 						}
 					});
-				self.options.reverse ? i-- : i++;
+				if (self.options.reverse) {
+					i--;
+				} else {
+					i++;
+				}
 			}, self.options.effectSpeed);
 		},
 

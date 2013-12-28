@@ -39,8 +39,7 @@ if ( typeof Object.create !== 'function' ) {
 
 		random: function () {
 			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
-			var effect = effects[(Math.floor(Math.random() * effects.length))];
-			this[effect]();
+			this[effects[(Math.floor(Math.random() * effects.length))]();
 		},
 
 		slide: function () {
@@ -61,8 +60,7 @@ if ( typeof Object.create !== 'function' ) {
 		},
 
 		fade: function () {
-			var opacity = this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;';  // IE8 and below. jQuery handles animating opacity natively.
-			this.setup(opacity);
+			this.setup(this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;');
 			this.run('opacity', this.$elem.css('opacity'));
 		},
 
@@ -103,8 +101,8 @@ if ( typeof Object.create !== 'function' ) {
 			var self = this;
 			var obj = {};
 			var i = this.options.reverse ? this.textArray.length - 1 : 0;
-			obj[effect] = oldEffect;
 			var $spans = self.$elem.children('span.text-effect');
+			obj[effect] = oldEffect;
 			var effectInterval = setInterval(function () {
 				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
 						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {

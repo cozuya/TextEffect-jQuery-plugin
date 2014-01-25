@@ -39,7 +39,7 @@ if ( typeof Object.create !== 'function' ) {
 
 		random: function () {
 			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
-			this[effects[(Math.floor(Math.random() * effects.length))]();
+			this[effects[(Math.floor(Math.random() * effects.length))]]();
 		},
 
 		slide: function () {

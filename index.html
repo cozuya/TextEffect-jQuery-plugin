@@ -1,104 +1,114 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Texteffect-jquery-plugin by Chris Ozols</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<title>Texteffect-jquery-plugin by Chris Ozols</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <p class="header">A simple plugin with various effects you can apply to text, letter by letter.  Current version 0.1.6.</p>
+		<link rel="stylesheet" href="stylesheets/styles.css">
+		<link rel="stylesheet" href="stylesheets/pygment_trac.css">
+		<script src="javascripts/scale.fix.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="wrapper">
+			<header>
+				<p class="header">A simple plugin with various effects you can apply to text, letter by letter.  Current version 0.1.6.</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="http://cozuya.github.com/TextEffect-jQuery-plugin/javascripts/textEffect.jquery.js">Download JS</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/cozuya/TextEffect-jQuery-plugin/zipball/master">Download ZIP</a></li>
-          <li><a class="buttons github" href="https://github.com/cozuya/TextEffect-jQuery-plugin">View On GitHub</a></li>
-        </ul>
+				<ul>
+					<li class="download"><a class="buttons" href="http://cozuya.github.com/TextEffect-jQuery-plugin/javascripts/textEffect.jquery.js">Download JS</a></li>
+					<li class="download"><a class="buttons" href="https://github.com/cozuya/TextEffect-jQuery-plugin/zipball/master">Download ZIP</a></li>
+					<li><a class="buttons github" href="https://github.com/cozuya/TextEffect-jQuery-plugin">View On GitHub</a></li>
+				</ul>
 
-        <p class="header">This project is created and maintained by <a class="header name" href="https://github.com/cozuya">Chris Ozols</a></p>
+				<p class="header">This project is created and maintained by <a class="header name" href="https://github.com/cozuya">Chris Ozols</a></p>
 
 
-      </header>
-      <section>
-        <h1>jQuery Text Effect Plugin</h1>
-        <h2>Usage</h2>
-        <pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object});</code></pre>
-        <h2>Effects</h2>
-          <div>
-            <button class="non-reverse">fade</button>
-            <button class="reverse">edaf</button>
-            <h3>Marshall Law</h3>
-          </div>
-          <div>
-            <button class="non-reverse">grow</button>
-            <button class="reverse">worg</button>
-            <h3>Paul Phoenix</h3>
-          </div>
-          <div>
-            <button class="non-reverse">jumble</button>
-            <button disabled>elbmuj</button>
-            <h3>Nina Williams</h3>
-          </div>
-          <div>
-            <button class="non-reverse">slide</button>
-            <button class="reverse">edils</button>
-            <h3>Kazuya Mishima</h3>
-          </div>
-          <div>
-            <button class="non-reverse">dropdown</button>
-            <button class="reverse">nwodpord</button>
-            <h3>Armor King</h3>
-          </div>
-          <h2>Options</h2>
-          <pre><code>{<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;effect: above effects, or "random".  Default is random.<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;effectSpeed: the speed at which new letters begin to animate.  Default 150.<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;completionSpeed: the speed of the animation.  Default 6000.<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;reverse: reverses direction of the effect, doesn't work for jumble just yet.  Boolean.<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;jumbleColor: color of the jumbled letters in hex.  Default is mid gray(#7f7f7f).<br />
-          }
-          </code></pre>
-          <h2>Details</h2>
-          <p>This plugin effectively works by turning a string into an array, wrapping it in span tags, and throwing it back into the DOM. As expected, event handlers don't work until the animation is complete. Works well in modern browsers and for the most part not bad in IE8 and below.  As this is a not-at-all mature plugin there's several things you should know/will be worked on. Some issues are:</p>
-          <ul>
-                  <li>Odd behaviour involving line breaks/word wraps.</li>
-                  <li>I don't recommend slide for mobile or responsive sites right now for again what should be obvious reasons.</li>
-                  <li>Combination effects will be in future versions.  Also CSS3 specific ones.</li>
-          </ul>
-      </section>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
-    <script>
-      jQuery(document).ready(function($) {
-        $('h1').textEffect();
+			</header>
+			<section>
+				<h1>jQuery Text Effect Plugin</h1>
+				<h2>Usage</h2>
+				<pre><code>jQuery('text node to act on').textEffect('string containing effect' || {options object});</code></pre>
+				<h2>Effects</h2>
+					<div>
+						<button class="non-reverse">fade</button>
+						<button class="reverse">edaf</button>
+						<h3>Marshall Law</h3>
+					</div>
+					<div>
+						<button class="non-reverse">grow</button>
+						<button class="reverse">worg</button>
+						<h3>Paul Phoenix</h3>
+					</div>
+					<div>
+						<button class="non-reverse">jumble</button>
+						<button disabled class="reverse-jumble">elbmuj</button>
+						<h3>Nina Williams</h3>
+					</div>
+					<div>
+						<button class="non-reverse">slide</button>
+						<button class="reverse">edils</button>
+						<h3>Kazuya Mishima</h3>
+					</div>
+					<div>
+						<button class="non-reverse">dropdown</button>
+						<button class="reverse">nwodpord</button>
+						<h3>Armor King</h3>
+					</div>
+					<h2>Options</h2>
+					<pre><code>{<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;effect: above effects, or "random".  Default is random.<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;effectSpeed: the speed at which new letters begin to animate.  Default 150.<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;completionSpeed: the speed of the animation.  Default 6000.<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;reverse: reverses direction of the effect, doesn't work for jumble just yet.  Boolean.<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;jumbleColor: color of the jumbled letters in hex.  Default is mid gray(#7f7f7f).<br />
+					}
+					</code></pre>
+					<h2>Details</h2>
+					<p>This plugin effectively works by turning a string into an array, wrapping it in span tags, and throwing it back into the DOM. As expected, event handlers don't work until the animation is complete. Works well in modern browsers and for the most part not bad in IE8 and below.  As this is a not-at-all mature plugin there's several things you should know/will be worked on. Some issues are:</p>
+					<ul>
+									<li>Odd behaviour involving line breaks/word wraps.</li>
+									<li>I don't recommend slide for mobile or responsive sites right now for again what should be obvious reasons.</li>
+									<li>Combination effects will be in future versions.  Also CSS3 specific ones.</li>
+					</ul>
+			</section>
+		</div>
+		<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="javascripts/textEffect.jquery.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+				$('h1').textEffect();
 
-        $('button.non-reverse').on('click', function(e) {
-          e.preventDefault();
-          $(this).next().next().css('visibility', 'visible').textEffect($(this).html());
-        });
+				$('button.non-reverse').on('click', function(e) {
+					e.preventDefault();
+					$(this).next().next().css('visibility', 'visible').textEffect($(this).html());
+					greyout();
+				});
 
-        $('button.reverse').on('click', function(e) {
-          e.preventDefault();
-          var $this = $(this);
-          var effect = $this.prev().html();
-          $this.next().css('visibility', 'visible').textEffect({
-            effect: effect,
-            reverse: true
-          });
-        });        
+				$('button.reverse').on('click', function(e) {
+					e.preventDefault();
+					var $this = $(this);
+					var effect = $this.prev().html();
+					$this.next().css('visibility', 'visible').textEffect({
+						effect: effect,
+						reverse: true
+					});
+					greyout();
+				});
 
-      });
-    </script>          
-  </body>
+			});
+			
+			var greyout = function () {
+				var $buttons = $('button:not(.reverse-jumble)');
+				$buttons.attr('disabled', true);
+				setTimeout(function () {
+					$buttons.attr('disabled', false);
+				}, 2500);
+			}
+		</script>          
+	</body>
 </html>

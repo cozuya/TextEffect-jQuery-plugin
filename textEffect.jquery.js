@@ -1,8 +1,6 @@
 ;
-
 // jQuery text effect plugin created by Chris Ozols copywrite MIT license 2013
 // v0.1.6
-
 if ( typeof Object.create !== 'function' ) {
 	Object.create = function( obj ) {
 		function F() {}
@@ -10,10 +8,8 @@ if ( typeof Object.create !== 'function' ) {
 		return new F();
 	};
 }
-
 (function( $, window, document, undefined ) {
 	"use strict";
-
 	var TextEffect = {
 		init: function (options, elem) {
 			var _options = {};
@@ -27,7 +23,6 @@ if ( typeof Object.create !== 'function' ) {
 			this.options = $.extend( {}, $.fn.textEffect.options, _options );
 			this[this.options.effect]();
 		},
-
 		setup: function (effectOption) {
 			this.textArray = [];
 			this.$elem.html('');  // oddly jQuery.empty() doesn't work as well here.
@@ -36,34 +31,28 @@ if ( typeof Object.create !== 'function' ) {
 				this.$elem.append(this.textArray[i]);
 			}
 		},
-
 		random: function () {
 			var effects = ['grow', 'fade', 'jumble', 'slide', 'dropdown'];
 			this[effects[(Math.floor(Math.random() * effects.length))]]();
 		},
-
 		slide: function () {
 			var startPosition = (this.$elem.offset().left + this.$elem.width());
 			this.setup('visibility: hidden; position: relative; left: ' + startPosition + 'px;');
 			this.run('left', 0);
 		},
-
 		dropdown: function () {
 			var offscreen = this.$elem.offset().top + this.$elem.height() * 1.1;  // little extra padding
 			this.setup('position: relative; bottom: ' + offscreen + 'px;');
 			this.run('bottom', 0);			
 		},
-
 		grow: function () {
 			this.setup('font-size: 0px;');
 			this.run('fontSize', this.$elem.css('fontSize'));
 		},
-
 		fade: function () {
 			this.setup(this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;');
 			this.run('opacity', this.$elem.css('opacity'));
 		},
-
 		jumble: function () {
 			var self = this;
 			var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -83,7 +72,6 @@ if ( typeof Object.create !== 'function' ) {
 				}
 			}, self.options.effectSpeed);
 		},
-
 		runJumble: function (letterArray, jumbleLength) {
 			var self = this;
 			this.jumbleInterval = setInterval(function () {
@@ -96,7 +84,6 @@ if ( typeof Object.create !== 'function' ) {
 				}
 			}, 70);
 		},
-
 		run: function (effect, oldEffect) {
 			var self = this;
 			var obj = {};
@@ -117,19 +104,16 @@ if ( typeof Object.create !== 'function' ) {
 				}
 			}, self.options.effectSpeed);
 		},
-
 		reset: function () {
 			this.$elem.html(this.oldText);
 		}
 	};
-
 	$.fn.textEffect = function(options) {
 		return this.each(function() {
 			var texteffect = Object.create(TextEffect);
 			texteffect.init(options, this);
 		});
 	};
-
 	$.fn.textEffect.options = {
 		effect: 'random',
 		effectSpeed: 150,

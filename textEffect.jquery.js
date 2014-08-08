@@ -49,60 +49,62 @@ if ( typeof Object.create !== 'function' ) {
 			this.setup('font-size: 0px;');
 			this.run('fontSize', this.$elem.css('fontSize'));
 		},
+		shrink: function () {
+			this.setup('');
+			this.run('fontSize', '0px');
+		},
 		fade: function () {
 			this.setup(this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;');
 			this.run('opacity', this.$elem.css('opacity'));
 		},
 		jumble: function () {
-			var self = this;
 			var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 			var i = 0;
 			this.setup();
 			var jumbleEffectInterval = setInterval(function () {
-				if (self.jumbleInterval) {
-					clearInterval(self.jumbleInterval);
+				if (this.jumbleInterval) {
+					clearInterval(this.jumbleInterval);
 				}
-				self.runJumble(letterArray, i);
-				self.$elem.children('span.text-effect').eq(i).html(self.oldText.substr(i, 1)).css('color', self.$elem.css('color'));
-				if (i === (self.oldText.length - 1)) {
+				this.runJumble(letterArray, i);
+				this.$elem.children('span.text-effect').eq(i).html(this.oldText.substr(i, 1)).css('color', this.$elem.css('color'));
+				if (i === (this.oldText.length - 1)) {
 					clearInterval(jumbleEffectInterval);
-					self.reset();
+					this.reset();
 				} else {
 					i++;
 				}
-			}, self.options.effectSpeed);
+			}.bind(this), this.options.effectSpeed);
 		},
 		runJumble: function (letterArray, jumbleLength) {
-			var self = this;
 			this.jumbleInterval = setInterval(function () {
-				for (var i = (self.textArray.length - 1); i > jumbleLength; i--) {
-					if (self.oldText.substr(i, 1) !== ' ') {
-						self.$elem.children('span.text-effect').eq(i).html(letterArray[Math.floor(Math.random() * (letterArray.length - 1))]).css('color', self.options.jumbleColor);
+				for (var i = (this.textArray.length - 1); i > jumbleLength; i--) {
+					if (this.oldText.substr(i, 1) !== ' ') {
+						this.$elem.children('span.text-effect').eq(i).html(letterArray[Math.floor(Math.random() * (letterArray.length - 1))]).css('color', this.options.jumbleColor);
 					} else {
-						self.$elem.children('span.text-effect').eq(i).html(' ');
+						this.$elem.children('span.text-effect').eq(i).html(' ');
 					}
 				}
-			}, 70);
+			}.bind(this), 70);
 		},
 		run: function (effect, oldEffect) {
-			var self = this;
 			var obj = {};
 			var i = this.options.reverse ? this.textArray.length - 1 : 0;
-			var $spans = self.$elem.children('span.text-effect');
+			var $spans = this.$elem.children('span.text-effect');
 			obj[effect] = oldEffect;
 			var effectInterval = setInterval(function () {
-				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
+				var self = this;
+				$spans.eq(i).css('visibility', 'visible').animate(obj, this.options.completionSpeed / this.textArray.length, function () {
 						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {
 							clearInterval(effectInterval);
 							self.reset();
 						}
 					});
-				if (self.options.reverse) {
+				if (this.options.reverse) {
 					i--;
 				} else {
 					i++;
 				}
-			}, self.options.effectSpeed);
+			}.bind(this), this.options.effectSpeed);
 		},
 		reset: function () {
 			this.$elem.html(this.oldText);

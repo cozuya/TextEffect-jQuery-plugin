@@ -106,6 +106,9 @@ if ( typeof Object.create !== 'function' ) {
 		},
 		reset: function () {
 			this.$elem.html(this.oldText);
+			if (this.options.onFinish) {
+				this.options.onFinish(this.$elem);
+			}
 		}
 	};
 	$.fn.textEffect = function(options) {

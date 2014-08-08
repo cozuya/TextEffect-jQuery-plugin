@@ -92,12 +92,13 @@ if ( typeof Object.create !== 'function' ) {
 			var $spans = this.$elem.children('span.text-effect');
 			obj[effect] = oldEffect;
 			var effectInterval = setInterval(function () {
+				var self = this;
 				$spans.eq(i).css('visibility', 'visible').animate(obj, this.options.completionSpeed / this.textArray.length, function () {
-						if ($(this).index() === this.textArray.length - 1 && !this.options.reverse || this.options.reverse && $(this).index() === 0) {
+						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {
 							clearInterval(effectInterval);
-							this.reset();
+							self.reset();
 						}
-					}.bind(this));
+					});
 				if (this.options.reverse) {
 					i--;
 				} else {

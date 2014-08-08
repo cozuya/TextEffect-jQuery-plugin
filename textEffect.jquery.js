@@ -49,6 +49,10 @@ if ( typeof Object.create !== 'function' ) {
 			this.setup('font-size: 0px;');
 			this.run('fontSize', this.$elem.css('fontSize'));
 		},
+		shrink: function () {
+			this.setup('');
+			this.run('fontSize', '0px');
+		},
 		fade: function () {
 			this.setup(this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;');
 			this.run('opacity', this.$elem.css('opacity'));
@@ -69,7 +73,7 @@ if ( typeof Object.create !== 'function' ) {
 				} else {
 					i++;
 				}
-			}, this.options.effectSpeed);
+			}.bind(this), this.options.effectSpeed);
 		},
 		runJumble: function (letterArray, jumbleLength) {
 			this.jumbleInterval = setInterval(function () {
@@ -80,7 +84,7 @@ if ( typeof Object.create !== 'function' ) {
 						this.$elem.children('span.text-effect').eq(i).html(' ');
 					}
 				}
-			}, 70);
+			}.bind(this), 70);
 		},
 		run: function (effect, oldEffect) {
 			var obj = {};
@@ -93,13 +97,13 @@ if ( typeof Object.create !== 'function' ) {
 							clearInterval(effectInterval);
 							this.reset();
 						}
-					});
+					}.bind(this));
 				if (this.options.reverse) {
 					i--;
 				} else {
 					i++;
 				}
-			}, this.options.effectSpeed);
+			}.bind(this), this.options.effectSpeed);
 		},
 		reset: function () {
 			this.$elem.html(this.oldText);

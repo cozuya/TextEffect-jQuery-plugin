@@ -66,7 +66,7 @@ if ( typeof Object.create !== 'function' ) {
 				self.$elem.children('span.text-effect').eq(i).html(self.oldText.substr(i, 1)).css('color', self.$elem.css('color'));
 				if (i === (self.oldText.length - 1)) {
 					clearInterval(jumbleEffectInterval);
-					self.reset();
+					self.reset(self.options.onFinish);
 				} else {
 					i++;
 				}
@@ -94,7 +94,7 @@ if ( typeof Object.create !== 'function' ) {
 				$spans.eq(i).css('visibility', 'visible').animate(obj, self.options.completionSpeed / self.textArray.length, function () {
 						if ($(this).index() === self.textArray.length - 1 && !self.options.reverse || self.options.reverse && $(this).index() === 0) {
 							clearInterval(effectInterval);
-							self.reset();
+							self.reset(self.options.onFinish);
 						}
 					});
 				if (self.options.reverse) {
@@ -104,8 +104,11 @@ if ( typeof Object.create !== 'function' ) {
 				}
 			}, self.options.effectSpeed);
 		},
-		reset: function () {
+		reset: function (onFinish) {
 			this.$elem.html(this.oldText);
+			if (onFinish) {
+				onFinish(this.$elem);
+			}
 		}
 	};
 	$.fn.textEffect = function(options) {

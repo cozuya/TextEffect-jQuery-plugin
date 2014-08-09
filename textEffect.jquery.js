@@ -49,6 +49,10 @@ if ( typeof Object.create !== 'function' ) {
 			this.setup('font-size: 0px;');
 			this.run('fontSize', this.$elem.css('fontSize'));
 		},
+		shrink: function() {
+			this.setup('');
+			this.run('fontSize', '0px');
+		},
 		fade: function () {
 			this.setup(this.$elem[0].style.opacity !== undefined ? 'opacity: 0;' : 'filter: alpha(opacity=0); display: inline-block;');
 			this.run('opacity', this.$elem.css('opacity'));
